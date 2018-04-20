@@ -1,0 +1,15 @@
+.Dashboard__properties_container {
+    width: 100%;
+    height: 74%;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+.Property__image_container {
+    height: 100%;
+    width: 150px;
+}
+.Property__image{
+    height: 100%;
+    width: 100%;
+
+}

@@ -107,6 +107,7 @@ body {
   .pink_bgc {
     background-color: #fec2c2;
     border: none;
+    padding: 7px;
   }
   .Wizard__stepHeader_btn {
     font-size: 16px;
@@ -124,6 +125,10 @@ body {
     align-items: center;
     color: rgba(0,0,0,.2);
     margin-bottom: 20px;
+}
+.Step3__image{
+  height: 100%;
+  width: 100%;
 }
   .StepHighlight__container {
     width: 100%;

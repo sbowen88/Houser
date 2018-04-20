@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import App from "./App";
 import Homepage from "./Views/Homepage";
 import Dashboard from "./Views/Dashboard";
 import Wizard1 from "./Views/Wizard1";

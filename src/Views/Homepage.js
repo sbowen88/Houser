@@ -11,9 +11,27 @@ class Homepage extends Component {
       username: "",
       password: ""
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.login = this.login.bind(this);
+    this.register = this.register.bind(this);
   }
   handleChange(prop, val) {
     this.setState({ [prop]: val });
+  }
+  login() {
+    axios
+      .post('/auth/login', {
+        username: this.state.username,
+        password: this.state.password
+      })
+      .then(res => this.props.history.push('/dashboard'));
+  }
+  register(){
+    axios.post('/register', {
+      username: this.state.username,
+      password: this.state.password
+    })
+    .then(res=>this.props.history.push('/dashboard'));
   }
 
   render() {
@@ -36,11 +54,13 @@ class Homepage extends Component {
             onChange={e => this.handleChange("password", e.target.value)}
           />
           <div className="Auth__buttons-container">
-            <button className="Auth__button_login lightest_green_bgc open-sans-bold">
-              <Link className='link'to='/Dashboard'>Login</Link>
+            <button className="Auth__button_login lightest_green_bgc open-sans-bold"  onClick={e => this.login()}>
+              Login
             </button>
-            <button className="Auth__button_register darkest_green_bgc open-sans-bold">
-              Register
+            <button
+              className="Auth__button_register darkest_green_bgc open-sans-bold" onClick={e=>this.register()}
+            >
+              Register 
             </button>
           </div>
         </div>

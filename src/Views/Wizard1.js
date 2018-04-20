@@ -15,6 +15,20 @@ import {
 class Wizard1 extends Component {
   constructor(props) {
     super(props);
+    this.logout = this.logout.bind(this);
+  }
+
+  componentDidMount() {
+    axios
+      .get("/checkIfLoggedIn")
+      .then()
+      .catch(res => {
+        console.log("error");
+        this.props.history.push("/");
+      });
+  }
+  logout() {
+    axios.post("/logout");
   }
 
   render() {
@@ -31,7 +45,7 @@ class Wizard1 extends Component {
               <div className="Header__right_container">
                 <span className="Header__right_span open-sans-bold">
                   {" "}
-                  <Link className="link" to="/">
+                  <Link className="link" to="/" onClick={e => this.logout()}>
                     Logout{" "}
                   </Link>
                 </span>

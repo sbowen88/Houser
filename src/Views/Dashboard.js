@@ -3,14 +3,60 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Styles/Dashboard.css";
 import logo from "./../images/header_logo.png";
+import Property from "./Property";
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      properties: []
+    };
+    this.getProperties = this.getProperties.bind(this);
+    this.logout = this.logout.bind(this);
+  }
+  componentDidMount() {
+    axios.get('/checkIfLoggedIn')
+    .then()
+    .catch(res => {
+      console.log('error')
+      this.props.history.push('/')
+    })
+
+    this.getProperties();
   }
 
+  getProperties() {
+    axios
+      .get('/getProperties')
+      .then(res => this.setState({ properties: res.data }));
+  }
+
+  logout() {
+    axios.post("/logout");
+  }
   render() {
+    const userProperties = this.state.properties.map(property => {
+      console.log('blah')
+      return (
+        <Property
+          key={property.id}
+          id={property.id}
+          address={property.address}
+          city={property.city}
+          propertyDescription={property.propertydescription}
+          loanAmount={property.loanamount}
+          monthlyMortgage={property.monthlymortgage}
+          propertyName={property.propertyname}
+          desired_rent={property.desiredrent}
+          State={property.State}
+          zip={property.zip}
+          imageUrl={property.imageurl}
+          recommended_rent={property.recommended_rent}
+          deleteProperty={this.deleteProperty}
+          getProperties={this.getProperties}
+        />
+      );
+    });
     return (
       <div className="root">
         <div className="Dashboard__container white_bgc">
@@ -24,7 +70,11 @@ class Dashboard extends Component {
               <div className="Header__right_container">
                 <span className="Header__right_span open-sans-bold">
                   {" "}
-                  <Link className="link" to="/">
+                  <Link
+                    to="/"
+                    className="Header__right_span open-sans-bold logout link"
+                    onClick={e => this.logout()}
+                  >
                     Logout{" "}
                   </Link>
                 </span>
@@ -59,6 +109,8 @@ class Dashboard extends Component {
           <div className="Dashboard__homeSpan_container">
             <span className="open-sans-bold"> Home Listings </span>
           </div>
+          <div />
+          <div className="userProperties">{userProperties}</div>
         </div>
       </div>
     );

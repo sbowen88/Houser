@@ -11,6 +11,7 @@ const initialState = {
   desiredRent: ""
 };
 
+const UPDATE_USER_ID = "UPDATE_USER_ID";
 const UPDATE_PROPERTY_NAME = "UPDATE_PROPERTY_NAME";
 const UPDATE_PROPERTY_DESCRIPTION = "UPDATE_PROPERTY_DESCRIPTION";
 const UPDATE_ADDRESS = "UPDATE_ADDRESS";
@@ -21,12 +22,13 @@ const UPDATE_IMAGE_URL = "UPDATE_IMAGE_URL";
 const UPDATE_LOAN_AMOUNT = "UPDATE_LOAN_AMOUNT";
 const UPDATE_MONTHLY_MORTGAGE = "UPDATE_MONTHLY_MORTGAGE";
 const UPDATE_DESIRED_RENT = "UPDATE_DESIRED_RENT";
-const CANCEL = 'CANCEL';
+const CANCEL = "CANCEL";
 
 function reducer(state = initialState, action) {
   console.log("REDUCER HIT: Action ->", action);
 
   switch (action.type) {
+
     case UPDATE_PROPERTY_NAME:
       return Object.assign({}, state, { propertyName: action.payload });
 
@@ -58,20 +60,19 @@ function reducer(state = initialState, action) {
       return Object.assign({}, state, { desiredRent: action.payload });
 
     case CANCEL:
-    console.log(action.payload)
-    return Object.assign({}, action.payload)
-
+      return Object.assign({}, action.payload);
 
     default:
       return state;
   }
 }
 
-export function cancel( ){
-   return{
+
+export function cancel() {
+  return {
     type: CANCEL,
     payload: initialState
-   }
+  };
 }
 export function updatePropertyName(propertyName) {
   return {
@@ -79,7 +80,6 @@ export function updatePropertyName(propertyName) {
     payload: propertyName
   };
 }
-
 
 export function updatePropertyDescription(propertyDescription) {
   return {
@@ -89,11 +89,11 @@ export function updatePropertyDescription(propertyDescription) {
 }
 
 export function updateAddress(address) {
-    return {
-      type: UPDATE_ADDRESS,
-      payload: address
-    };
-  }
+  return {
+    type: UPDATE_ADDRESS,
+    payload: address
+  };
+}
 
 export function updateCity(city) {
   return {
