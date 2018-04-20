@@ -32,7 +32,7 @@ module.exports = {
       })
       .catch(err => {
         console.log(err);
-        res.status(500).send("Please Register");
+        res.status(500).send("Please Register Now");
       });
   },
   getProperties: (req, res) => {
