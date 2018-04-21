@@ -30,9 +30,11 @@ app.post("/register", ctrl.registerUser);
 
 app.post("/auth/login", ctrl.loginUser);
 
-app.get('/checkIfLoggedIn', checkIfLoggedIn)
+app.get('/checkIfLoggedIn', checkIfLoggedIn);
 
 app.get("/getProperties", ctrl.getProperties);
+
+app.get('/filterProperties', ctrl.filterProperties)
 
 app.delete("/deleteProperty/:id", ctrl.deleteProperty);
 

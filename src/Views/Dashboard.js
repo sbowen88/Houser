@@ -9,26 +9,37 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      properties: []
+      properties: [],
+      greaterThan: ""
     };
     this.getProperties = this.getProperties.bind(this);
     this.logout = this.logout.bind(this);
   }
   componentDidMount() {
-    axios.get('/checkIfLoggedIn')
-    .then()
-    .catch(res => {
-      console.log('error')
-      this.props.history.push('/')
-    })
+    axios
+      .get("/checkIfLoggedIn")
+      .then()
+      .catch(res => {
+        console.log("error");
+        this.props.history.push("/");
+      });
 
     this.getProperties();
   }
 
   getProperties() {
     axios
-      .get('/getProperties')
-      .then(res => this.setState({ properties: res.data }));
+      .get("/getProperties")
+      .then(res => this.setState({ properties: res.data, greaterThan:0 }));
+  }
+
+  filterProperties(greaterThan) {
+    axios
+      .get(`/filterProperties/?greaterThan=${this.state.greaterThan}`)
+      .then(response => this.setState({ properties: response.data }));
+  }
+  updateGreaterThan(value) {
+    this.setState({ greaterThan: value });
   }
 
   logout() {
@@ -36,7 +47,7 @@ class Dashboard extends Component {
   }
   render() {
     const userProperties = this.state.properties.map(property => {
-      console.log('blah')
+      console.log("blah");
       return (
         <Property
           key={property.id}
@@ -90,18 +101,23 @@ class Dashboard extends Component {
 
           <div className="Filter__container">
             <span className="open-sans Filter__description">
-              List properties with "desired rent" greator than: $
+              List properties with "desired rent" greater than: $
             </span>
             <input
+              type="number"
               className="open-sans dark_green_border Filter__input"
               placeholder="0"
-              value=""
+              value={this.state.greaterThan}
+              onChange={e => this.updateGreaterThan(e.target.value)}
             />
-            <button className="open-sans lightest_green_bgc Filter__btn">
+            <button
+              className="open-sans lightest_green_bgc Filter__btn"
+              onClick={() => this.filterProperties()}
+            >
               {" "}
               Filter{" "}
             </button>
-            <button className="open-sans darkest_green_bgc Filter__btn Filter__btn_reset">
+            <button className="open-sans darkest_green_bgc Filter__btn Filter__btn_reset" onClick={()=>this.getProperties()}>
               {" "}
               Reset{" "}
             </button>

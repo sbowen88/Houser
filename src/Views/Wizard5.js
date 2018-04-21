@@ -112,7 +112,7 @@ class Wizard5 extends Component {
             </div>
             <div className="Step__container">
               <span className="open-sans-bold Recommended-rent">
-                Recommended Rent: ${this.props.desiredRent*1.25}
+                Recommended Rent: ${this.props.loanAmount*1.25}
               </span>
               <div className="Step5__name_container">
                 <span className="open-sans-bold Step__input_header Step1__name_header">

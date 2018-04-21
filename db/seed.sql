@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS properties(
     imageUrl TEXT,
     loanAmount VARCHAR(20),
     monthlyMortgage VARCHAR(20),
-    desiredRent VARCHAR(20)
+    desiredRent INTEGER(20)
 );
 
 -- ADD PROPERTY INTO TABLE

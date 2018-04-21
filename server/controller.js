@@ -46,6 +46,21 @@ module.exports = {
       })
       .catch(() => res.status(500).send());
   },
+  filterProperties: (req, res) => {
+    let { greaterThan } = req.query;
+    let user_id = req.session.user.id;
+    let db = req.app.get('db');
+    if(!greaterThan){
+        res.status(500).send();
+    }else{
+        if(greaterThan){
+            db.filterProperties([user_id, greaterThan])
+            .then( (resp) => {
+                res.status(200).send(resp)
+            })
+        }
+    }
+},
 
   logout: (req, res) => {
     req.session.destroy();
