@@ -33,7 +33,7 @@ function reducer(state = initialState, action) {
       return Object.assign({}, state, { propertyName: action.payload });
 
     case UPDATE_PROPERTY_DESCRIPTION:
-      return Object.assign({}, state, { propertyDescription: action.payload });
+      return Object.assign({}, state, { propertyescription: action.payload });
 
     case UPDATE_ADDRESS:
       return Object.assign({}, state, { address: action.payload });

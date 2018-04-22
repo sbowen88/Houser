@@ -2,12 +2,13 @@ module.exports = {
   registerUser: (req, res) => {
     let db = req.app.get("db");
     let { username, password } = req.body;
-    let { user } = req.session;
+   
     db
       .create_user([username, password])
       .then(result => {
-        user = result[0].username;
-        res.status(200).send(result[0]);
+        req.session.user = result[0];
+        req.session.user.id = result[0].id;
+        res.status(200).send();
       })
       .catch(err => {
         console.log(err);
@@ -28,7 +29,7 @@ module.exports = {
         req.session.user = result[0];
         req.session.user.id = result[0].id;
         res.status(200).send(result);
-        console.log(result, req.session.user.id);
+        console.log(result);
       })
       .catch(err => {
         console.log(err);

@@ -30,7 +30,7 @@ class Dashboard extends Component {
   getProperties() {
     axios
       .get("/getProperties")
-      .then(res => this.setState({ properties: res.data, greaterThan:0 }));
+      .then(res => this.setState({ properties: res.data, greaterThan:'' }));
   }
 
   filterProperties(greaterThan) {
